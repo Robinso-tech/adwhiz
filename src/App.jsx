@@ -5,6 +5,9 @@ export default function App() {
   const [audience, setAudience] = useState("");
   const [result, setResult] = useState(null);
 
+  // Stripe Payment Link (replace with your real link from Stripe dashboard)
+  const STRIPE_PAYMENT_LINK = "https://buy.stripe.com/test_dRm8wO1YH47YdE53z5f7i00";
+
   // Simple generator function
   function handleGenerate() {
     if (!productName || !audience) {
@@ -45,6 +48,11 @@ export default function App() {
     setResult({ hooks, script30, script15, shotlist });
   }
 
+  // Function to open Stripe checkout
+  function handleUpgrade() {
+    window.open(STRIPE_PAYMENT_LINK, "_blank");
+  }
+
   return (
     <div style={{ fontFamily: "Arial, sans-serif", padding: "20px" }}>
       <h1>AdWhiz AI (Beginner MVP)</h1>
@@ -69,6 +77,10 @@ export default function App() {
       </div>
 
       <button onClick={handleGenerate}>Generate Ads</button>
+      {" "}
+      <button onClick={handleUpgrade} style={{ marginLeft: "10px", background: "#111", color: "#fff", padding: "6px 12px" }}>
+        Upgrade to Pro ($49/mo)
+      </button>
 
       {result && (
         <div style={{ marginTop: "20px" }}>
